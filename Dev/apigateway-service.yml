@@ -1,0 +1,44 @@
+spring:
+  main: allow-bean-definition-overriding=true
+  application:
+    name: API_GATEWAY
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          "[/**]":
+            allowedOrigins:
+              - http://localhost:4200
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders: "*"
+            allowCredentials: true
+      routes:
+        - id: user-management
+          uri: lb://user-management
+          predicates:
+            - Path= /login/**
+            - Path= /refreshToken/**
+            - Path= /users/**
+            - Path= /updateUser/**
+            - Path= /deleteUser/**
+            - Path= /forgetPassword/**
+            - Path= /registrationApi/**
+        - id: equipement-management
+          uri: lb://equipement-management
+          predicates:
+            - Path= /equipements/**
+        - id: contract-management
+          uri: lb://contract-management
+          predicates:
+            - Path= /contracts/**
+    discovery:
+      enabled: true
+eureka:
+  client:
+    serviceUrl.defaultZone: http://localhost:8761/eureka/
+server:
+  port: 8089

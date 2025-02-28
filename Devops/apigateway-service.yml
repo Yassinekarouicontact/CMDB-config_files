@@ -1,0 +1,73 @@
+spring:
+  application:
+    name: API_GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: authentication-service
+          uri: lb://authentication-service
+          predicates:
+            - Path= /login/**
+        - id: registration-service
+          uri: lb://registration-service
+          predicates:
+            - Path= /registrationApi/**
+        - id: forgetPassword-service
+          uri: lb://forgetPassword-service
+          predicates:
+            - Path= /forgetPassword/**
+        - id: retreive-users-service
+          uri: lb://retreive-users-service
+          predicates:
+            - Path= /users/**
+        - id: update-users-service
+          uri: lb://update-users-service
+          predicates:
+            - Path= /updateUser/**
+        - id: delete-users-service
+          uri: lb://delete-users-service
+          predicates:
+            - Path= /deleteUser/**
+        - id: create-equipements-service
+          uri: lb://create-equipements-service
+          predicates:
+            - Path= /equipements/**
+        - id: update-equipements-service
+          uri: lb://update-equipements-service
+          predicates:
+            - Path= /equipements/**
+        - id: delete-equipements-service
+          uri: lb://delete-equipements-service
+          predicates:
+            - Path= /equipements/**
+        - id: retreive-equipements-service
+          uri: lb://retreive-equipements-service
+          predicates:
+            - Path= /equipements/**
+        - id: create-contracts-service
+          uri: lb://create-contracts-service
+          predicates:
+            - Path= /contracts/**
+        - id: update-contracts-service
+          uri: lb://update-contracts-service
+          predicates:
+            - Path= /contracts/**
+        - id: delete-contracts-service
+          uri: lb://delete-contracts-service
+          predicates:
+            - Path= /contracts/**
+        - id: retreive-contracts-service
+          uri: lb://retreive-contracts-service
+          predicates:
+            - Path= /contracts/**
+        - id: notifications-service
+          uri: lb://notifications-service
+          predicates:
+            - Path= /notifications/**
+    discovery:
+      enabled: true
+eureka:
+  client:
+    serviceUrl.defaultZone: http://discovery-service:8761/eureka/
+server:
+  port: 8087
